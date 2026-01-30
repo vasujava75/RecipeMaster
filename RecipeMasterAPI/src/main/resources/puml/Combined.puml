@@ -1,0 +1,42 @@
+@startuml
+!theme plain
+title Recipe Command API - Complete Architecture
+
+actor Client
+box "Controller Layer" #LightBlue
+    participant "RecipeCommandController" as Controller
+end box
+
+box "Service Layer" #LightGreen
+    participant "RecipeCommandService" as Service
+    participant "RecipeMapper" as Mapper
+end box
+
+box "Repository Layer" #LightYellow
+    participant "RecipeRepository" as Repository
+end box
+
+box "Database Layer" #LightPink
+    database "PostgreSQL\n(Testcontainers)" as DB
+end box
+
+note over Client, DB
+    All endpoints follow similar patterns:
+    1. HTTP Request validation
+    2. Service layer processing
+    3. Entity mapping
+    4. Database operations
+    5. Response mapping6. HTTP Response
+end note
+
+Client -> Controller: HTTP Request
+Controller -> Service: Business Logic
+Service -> Mapper: DTO ↔ Entity
+Service -> Repository: Data Access
+Repository -> DB: SQL Operations
+DB --> Repository: Results
+Repository --> Service: Entities
+Service --> Controller: DTOs
+Controller --> Client: HTTP Response
+
+@enduml

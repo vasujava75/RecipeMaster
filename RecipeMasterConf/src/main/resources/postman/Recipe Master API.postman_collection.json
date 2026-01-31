@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "1ea721cd-fa45-43f5-8eb8-d63be388abaa",
+		"name": "Recipe Master API",
+		"description": "API for managing recipes with ingredients",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Recipe Query",
+			"item": [
+				{
+					"name": "Get All Recipes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/recipes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipes"
+							]
+						},
+						"description": "Retrieves a list of all recipes"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recipe by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/recipes/{{recipeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"{{recipeId}}"
+							]
+						},
+						"description": "Retrieves a specific recipe by its ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recipe Command",
+			"item": [
+				{
+					"name": "Create Recipe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Chocolate Chip Cookies\",\n  \"description\": \"Delicious homemade cookies\",\n  \"instructions\": \"Mix ingredients and bake for 15 minutes\",\n  \"servings\": 4,\n  \"vegetarian\": true,\n  \"prepTimeMinutes\": 15,\n  \"cookTimeMinutes\": 30,\n  \"difficulty\": \"EASY\",\n  \"ingredients\": [\n    {\n      \"name\": \"Flour\",\n      \"quantity\": 2,\n      \"unit\": \"cups\"\n    },\n    {\n      \"name\": \"Sugar\",\n      \"quantity\": 1,\n      \"unit\": \"cup\"\n    },\n    {\n      \"name\": \"Chocolate Chips\",\n      \"quantity\": 1,\n      \"unit\": \"cup\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/recipes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipes"
+							]
+						},
+						"description": "Creates a new recipe with ingredients"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Recipe",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Chocolate Chip Cookies\",\n  \"description\": \"Updated delicious homemade cookies\",\n  \"instructions\": \"Mix ingredients thoroughly and bake for 18 minutes\",\n  \"servings\": 6,\n  \"vegetarian\": true,\n  \"prepTimeMinutes\": 20,\n  \"cookTimeMinutes\": 18,\n  \"difficulty\": \"MEDIUM\",\n  \"ingredients\": [\n    {\n      \"name\": \"Flour\",\n      \"quantity\": 2.5,\n      \"unit\": \"cups\"\n    },\n    {\n      \"name\": \"Brown Sugar\",\n      \"quantity\": 1.5,\n      \"unit\": \"cups\"\n    },\n    {\n      \"name\": \"Dark Chocolate Chips\",\n      \"quantity\": 1.5,\n      \"unit\": \"cups\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/recipes/{{recipeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"{{recipeId}}"
+							]
+						},
+						"description": "Updates a recipe by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Recipe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/recipes/{{recipeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"recipes",
+								"{{recipeId}}"
+							]
+						},
+						"description": "Delete a recipe by ID"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "recipeId",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}

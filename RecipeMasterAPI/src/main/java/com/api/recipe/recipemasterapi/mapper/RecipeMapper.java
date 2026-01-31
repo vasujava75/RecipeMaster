@@ -32,7 +32,7 @@ public class RecipeMapper {
         recipe.setDescription(dto.getDescription());
         recipe.setInstructions(dto.getInstructions());
         recipe.setServings(dto.getServings());
-        recipe.setIngredients(mapIngredientsToEntity(dto.getIngredients()));
+        recipe.setIngredients(mapIngredientsToEntity(dto.getIngredients(), recipe));
         return recipe;
     }
 
@@ -43,7 +43,7 @@ public class RecipeMapper {
         if (source.getDescription() != null) target.setDescription(source.getDescription());
         if (source.getInstructions() != null) target.setInstructions(source.getInstructions());
         if (source.getServings() != null) target.setServings(source.getServings());
-        if (source.getIngredients() != null) target.setIngredients(mapIngredientsToEntity(source.getIngredients()));
+        if (source.getIngredients() != null) target.setIngredients(mapIngredientsToEntity(source.getIngredients(), target));
     }
 
     private List<IngredientDto> mapIngredientsToDto(List<Ingredient> ingredients) {
@@ -61,7 +61,7 @@ public class RecipeMapper {
                 .collect(Collectors.toList());
     }
 
-    private List<Ingredient> mapIngredientsToEntity(List<IngredientDto> ingredientDtos) {
+    private List<Ingredient> mapIngredientsToEntity(List<IngredientDto> ingredientDtos, Recipe recipe) {
         if (ingredientDtos == null) return null;
 
         return ingredientDtos.stream()
@@ -71,6 +71,7 @@ public class RecipeMapper {
                     ingredient.setName(dto.getName());
                     ingredient.setQuantity(parseQuantity(dto.getQuantity()));
                     ingredient.setUnit(dto.getUnit());
+                    ingredient.setRecipe(recipe);  // Set the parent recipe
                     return ingredient;
                 })
                 .collect(Collectors.toList());

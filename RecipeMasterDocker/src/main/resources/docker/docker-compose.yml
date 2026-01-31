@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15
@@ -21,9 +19,8 @@ services:
       retries: 3
 
   recipe-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: vasujava75/recipemaster:latest
+    pull_policy: never
     container_name: recipe-api
     ports:
       - "8080:8080"

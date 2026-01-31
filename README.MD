@@ -85,7 +85,40 @@ Which does following work
 - Internally it will up both postgress and application together
 - Test using postman collection provided in the RecipeMasterConf/postman folder.
 
+## Health and Metrics Endpoints
 
+# Test basic health endpoint
+curl -X GET http://localhost:8080/actuator/health
+
+# Test database health specifically
+curl -X GET http://localhost:8080/actuator/health/db
+
+# Test application info
+curl -X GET http://localhost:8080/actuator/info
+
+# Test all available metrics
+curl -X GET http://localhost:8080/actuator/metrics
+
+# Test specific HikariCP metrics
+curl -X GET http://localhost:8080/actuator/metrics/hikaricp.connections.active
+curl -X GET http://localhost:8080/actuator/metrics/hikaricp.connections.idle
+curl -X GET http://localhost:8080/actuator/metrics/hikaricp.connections.total
+
+# Test JVM metrics
+curl -X GET http://localhost:8080/actuator/metrics/jvm.memory.used
+curl -X GET http://localhost:8080/actuator/metrics/jvm.threads.live
+
+# Test HTTP request metrics
+curl -X GET http://localhost:8080/actuator/metrics/http.server.requests
+
+# Test environment properties
+curl -X GET http://localhost:8080/actuator/env
+
+# Test Flyway migration info
+curl -X GET http://localhost:8080/actuator/flyway
+
+# Test Prometheus metrics (for monitoring tools)
+curl -X GET http://localhost:8080/actuator/prometheus
 
 ## Pending work
 

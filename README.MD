@@ -44,10 +44,10 @@ The application follows CQRS pattern with separate controllers:
 
 ### Prerequisites
 
-- Java 17 or higher
+- Java 21
 - Maven 3.6+
 - PostgreSQL 12+
-- Docker installed and running (for testing)
+- Docker installed and running (for both testing the api and local testing also)
 
 ### Installation
 

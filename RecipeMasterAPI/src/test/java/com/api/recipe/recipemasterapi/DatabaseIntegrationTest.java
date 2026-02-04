@@ -47,21 +47,6 @@ class DatabaseIntegrationTest {
         assertThat(ingredientsTableCount).isEqualTo(1);
     }
 
-    /*@Test
-    void canInsertAndRetrieveRecipe() {
-        // Test basic CRUD operations
-        jdbcTemplate.update(
-                "INSERT INTO recipes (name, instructions, servings, vegetarian) VALUES (?, ?, ?, ?)",
-                "Test Recipe", "Test instructions", 4, false
-        );
-
-        Integer count = jdbcTemplate.queryForObject(
-                "SELECT COUNT(*) FROM recipes WHERE name = ?",
-                Integer.class,
-                "Test Recipe"
-        );
-        assertThat(count).isEqualTo(1);
-    }*/
 
 
 

@@ -8,11 +8,18 @@ import java.util.Optional;
 
 public interface RecipeReader {
     List<Recipe> findAll();
+
     Optional<Recipe> findById(Long id);
+
     List<Recipe> findByVegetarian(Boolean vegetarian);
+
     List<Recipe> findByServings(Integer servings);
+
     List<Recipe> findByNameContainingIgnoreCase(String name);
+
     List<Recipe> search(RecipeSearchCriteria criteria);
+
     boolean existsById(Long id);
+
     long count();
 }

@@ -2,6 +2,7 @@ package com.api.recipe.recipemasterapi.service;
 
 import com.api.recipe.recipemasterapi.dto.RecipeDto;
 import com.api.recipe.recipemasterapi.domain.Recipe;
+import com.api.recipe.recipemasterapi.exceptions.RecipeNotFoundException;
 import com.api.recipe.recipemasterapi.repository.RecipeRepository;
 import com.api.recipe.recipemasterapi.mapper.RecipeMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -110,8 +111,8 @@ class RecipeCommandServiceTest {
         when(recipeRepository.findById(id)).thenReturn(Optional.empty());
 
         // When & Then
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
+        RecipeNotFoundException exception = assertThrows(
+                RecipeNotFoundException.class,
                 () -> recipeCommandService.updateRecipe(id, inputDto)
         );
 
@@ -166,8 +167,8 @@ class RecipeCommandServiceTest {
         when(recipeRepository.findById(id)).thenReturn(Optional.empty());
 
         // When & Then
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
+        RecipeNotFoundException exception = assertThrows(
+                RecipeNotFoundException.class,
                 () -> recipeCommandService.deleteRecipe(id)
         );
 

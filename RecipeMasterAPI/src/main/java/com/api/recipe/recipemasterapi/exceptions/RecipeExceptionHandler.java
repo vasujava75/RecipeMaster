@@ -1,9 +1,11 @@
 package com.api.recipe.recipemasterapi.exceptions;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -39,5 +41,11 @@ public class RecipeExceptionHandler {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getClass().getSimpleName() + ": " + ex.getMessage());
         return ResponseEntity.badRequest().body(error);
+    }
+
+    @ExceptionHandler(RecipeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleRecipeNotFoundException(RecipeNotFoundException ex) {
+        return Map.of("error", ex.getMessage());
     }
 }

@@ -2,6 +2,7 @@ package com.api.recipe.recipemasterapi.service;
 
 import com.api.recipe.recipemasterapi.domain.Recipe;
 import com.api.recipe.recipemasterapi.dto.RecipeDto;
+import com.api.recipe.recipemasterapi.exceptions.RecipeNotFoundException;
 import com.api.recipe.recipemasterapi.mapper.RecipeMapper;
 import com.api.recipe.recipemasterapi.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class RecipeCommandService {
 
     public RecipeDto updateRecipe(Long id, RecipeDto recipeDto) {
         Recipe existingRecipe = recipeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Recipe not found with id: " + id));
+                .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
 
         recipeMapper.updateEntity(existingRecipe, recipeDto);
         validationService.validateRecipe(existingRecipe);
@@ -39,7 +40,7 @@ public class RecipeCommandService {
 
     public void deleteRecipe(Long id) {
         Recipe existingRecipe = recipeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Recipe not found with id: " + id));
+                .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
 
         recipeRepository.delete(existingRecipe);
     }

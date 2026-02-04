@@ -34,10 +34,10 @@ public class IngredientFilterStrategy implements RecipeFilterStrategy {
 
         return recipe.getIngredients().stream()
                 .anyMatch(ingredient ->
-                    ingredientNames.stream()
-                        .anyMatch(name ->
-                            ingredient.getName().toLowerCase().contains(name.toLowerCase())
-                        )
+                        ingredientNames.stream()
+                                .anyMatch(name ->
+                                        ingredient.getName().toLowerCase().contains(name.toLowerCase())
+                                )
                 );
     }
 }

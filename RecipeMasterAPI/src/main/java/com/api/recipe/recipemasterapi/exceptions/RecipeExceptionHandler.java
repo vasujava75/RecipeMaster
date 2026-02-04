@@ -23,10 +23,16 @@ public class RecipeExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleJsonParse(HttpMessageNotReadableException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", "Invalid JSON: " + ex.getMostSpecificCause().getMessage());
-        return ResponseEntity.badRequest().body(error);
+        Throwable cause = ex.getMostSpecificCause();
+        String message = "Invalid JSON";
+        if (cause != null && cause.getMessage() != null) {
+            message += ": " + cause.getMessage();
+        } else {
+            message += ": " + ex.getMessage();
+        }
+        return ResponseEntity.badRequest().body(Map.of("error", message));
     }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleAll(Exception ex) {

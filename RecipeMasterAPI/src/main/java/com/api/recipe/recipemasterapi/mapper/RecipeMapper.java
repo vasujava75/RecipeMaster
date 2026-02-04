@@ -1,10 +1,11 @@
 package com.api.recipe.recipemasterapi.mapper;
 
-import com.api.recipe.recipemasterapi.domain.Recipe;
 import com.api.recipe.recipemasterapi.domain.Ingredient;
-import com.api.recipe.recipemasterapi.dto.RecipeDto;
+import com.api.recipe.recipemasterapi.domain.Recipe;
 import com.api.recipe.recipemasterapi.dto.IngredientDto;
+import com.api.recipe.recipemasterapi.dto.RecipeDto;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,8 @@ public class RecipeMapper {
         if (source.getDescription() != null) target.setDescription(source.getDescription());
         if (source.getInstructions() != null) target.setInstructions(source.getInstructions());
         if (source.getServings() != null) target.setServings(source.getServings());
-        if (source.getIngredients() != null) target.setIngredients(mapIngredientsToEntity(source.getIngredients(), target));
+        if (source.getIngredients() != null)
+            target.setIngredients(mapIngredientsToEntity(source.getIngredients(), target));
     }
 
     private List<IngredientDto> mapIngredientsToDto(List<Ingredient> ingredients) {

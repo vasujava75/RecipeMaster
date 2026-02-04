@@ -1,9 +1,9 @@
 package com.api.recipe.recipemasterapi.service;
 
 import com.api.recipe.recipemasterapi.dto.RecipeDto;
-import com.api.recipe.recipemasterapi.utils.RecipeSearchCriteria;
 import com.api.recipe.recipemasterapi.mapper.RecipeMapper;
 import com.api.recipe.recipemasterapi.repository.RecipeRepository;
+import com.api.recipe.recipemasterapi.utils.RecipeSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

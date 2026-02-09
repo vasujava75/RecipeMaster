@@ -46,10 +46,28 @@ public class JpaRecipeSearchEngine implements RecipeSearchEngine {
             predicates.add(cb.equal(recipe.get("difficulty"), criteria.getDifficulty()));
         }
 
-        // Filter by ingredients (if specified)
-        if (criteria.getIngredients() != null && !criteria.getIngredients().isEmpty()) {
+        // Filter by ingredients (include if specified)
+        if (criteria.getIncludeIngredients() != null && !criteria.getIncludeIngredients().isEmpty()) {
             Join<Object, Object> ingredientJoin = recipe.join("ingredients");
-            predicates.add(ingredientJoin.get("name").in(criteria.getIngredients()));
+            predicates.add(ingredientJoin.get("name").in(criteria.getIncludeIngredients()));
+        }
+
+        // Filter by ingredients (exclude if specified)
+        if (criteria.getExcludeIngredients() != null && !criteria.getExcludeIngredients().isEmpty()) {
+            Subquery<Long> subquery = query.subquery(Long.class);
+            Root<Recipe> subRecipe = subquery.from(Recipe.class);
+            Join<Object, Object> subIngredientJoin = subRecipe.join("ingredients");
+
+            subquery.select(subRecipe.get("id"))
+                    .where(subIngredientJoin.get("name").in(criteria.getExcludeIngredients()));
+
+            predicates.add(cb.not(recipe.get("id").in(subquery)));
+        }
+
+        // Filter by instructions text search
+        if (criteria.getInstructionsText() != null && !criteria.getInstructionsText().trim().isEmpty()) {
+            predicates.add(cb.like(cb.lower(recipe.get("instructions")),
+                    "%" + criteria.getInstructionsText().toLowerCase() + "%"));
         }
 
         // Filter by max prep time

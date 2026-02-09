@@ -14,16 +14,18 @@ public class RecipeSearchCriteria {
     private Boolean vegetarian;
     private Integer servings;
     private DifficultyLevel difficulty;
-    private List<String> ingredients;
+    private List<String> includeIngredients;
+    private List<String> excludeIngredients;
+    private String instructionsText;
     private Integer maxPrepTime;
     private Integer maxCookTime;
 
     public RecipeSearchCriteria(String name, Boolean vegetarian, Integer servings,
-                                DifficultyLevel difficulty, List<String> ingredients) {
+                                DifficultyLevel difficulty, List<String> includeIngredients) {
         this.name = name;
         this.vegetarian = vegetarian;
         this.servings = servings;
         this.difficulty = difficulty;
-        this.ingredients = ingredients;
+        this.includeIngredients = includeIngredients;
     }
 }

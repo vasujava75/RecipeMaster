@@ -3,6 +3,7 @@ package com.api.recipe.recipemasterapi.service;
 import com.api.recipe.recipemasterapi.dto.RecipeDto;
 import com.api.recipe.recipemasterapi.mapper.RecipeMapper;
 import com.api.recipe.recipemasterapi.repository.RecipeRepository;
+import com.api.recipe.recipemasterapi.repository.RecipeSearchEngine;
 import com.api.recipe.recipemasterapi.utils.RecipeSearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,19 @@ public class RecipeQueryService {
     private RecipeRepository recipeRepository;
 
     @Autowired
+    private RecipeSearchEngine recipeSearchEngine;
+
+    @Autowired
     private RecipeMapper recipeMapper;
 
     public List<RecipeDto> searchRecipes(RecipeSearchCriteria criteria) {
-        return recipeRepository.findAll().stream()
+        if (criteria == null) {
+            return recipeRepository.findAll().stream()
+                    .map(recipeMapper::toDto)
+                    .collect(Collectors.toList());
+        }
+
+        return recipeSearchEngine.search(criteria).stream()
                 .map(recipeMapper::toDto)
                 .collect(Collectors.toList());
     }
